@@ -48,6 +48,7 @@ option(BGFX_CUSTOM_TARGETS "Include convenience custom targets." ON)
 option(BGFX_CONFIG_MULTITHREADED "Build bgfx with multithreaded configuration" ON)
 option(BGFX_CONFIG_RENDERER_WEBGPU "Enable the webgpu renderer" OFF)
 option(BGFX_CONFIG_DEBUG_ANNOTATION "Enable gfx debug annotations (default: on in debug)" OFF)
+option(BUILD_RK3588 "Enable RK3588 platform flags" OFF)
 
 set(BGFX_OPENGL_VERSION "" CACHE STRING "Specify minimum opengl version")
 set(BGFX_OPENGLES_VERSION "" CACHE STRING "Specify minimum OpenGL ES version")
@@ -71,6 +72,10 @@ set(BGFX_CMAKE_USER_SCRIPT "" CACHE STRING "Path to custom cmake script to inclu
 
 if(BGFX_CMAKE_USER_SCRIPT)
 	include(${BGFX_CMAKE_USER_SCRIPT})
+endif()
+
+if(BUILD_RK3588)
+	add_compile_definitions(__RK3588__)
 endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
